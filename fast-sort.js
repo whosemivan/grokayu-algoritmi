@@ -49,3 +49,38 @@ const count = (arr) => {
 };
 
 console.log(count([4, 23, 1, 21, 21, 21]));
+
+
+// ВСЁ ЧТО ВЫШЕ, ЭТО СТРАТЕГИЯ - РАЗДЕЛЯЙ И ВЛАСТВУЙ, ДАЛЬШЕ АЛГОРИТМ - БЫСТРОЙ СОРТИРОВКИ 
+
+
+const quickSort = (arr) => {
+	if (arr.length < 2) {
+		return arr;
+	} else {
+		let pivot = arr[0];
+		let less = [];
+		let greater = [];
+
+		arr = arr.splice(1, arr.length);
+
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i] <= pivot) {
+				less.push(arr[i]);
+			}
+		}
+
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i] > pivot) {
+				greater.push(arr[i]);
+			}
+		}
+
+		arr = [...quickSort(less), ...[pivot], ...quickSort(greater)];
+
+		return arr;
+	}
+};
+
+
+console.log(quickSort([4, 3, 6, 1, 2, 5, 98, 14, 0]));
